@@ -1,0 +1,24 @@
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--brand-background); color: var(--brand-text); font-family: var(--brand-font); line-height: 1.6; }
+button, input, select, textarea { font: inherit; }
+.app-shell { min-height: 100vh; display: flex; flex-direction: column; }
+.app-header { background: var(--brand-surface); border-top: 0.3rem solid var(--brand-primary); border-bottom: 1px solid var(--brand-border); }
+.header-content { max-width: var(--brand-content-width); margin: auto; padding: 0 2rem; display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap; }
+/* Logo width 128px: clear space exceeds 0.25W horizontally and 0.66H vertically. */
+.brand-logo-space { padding: 32px; flex-shrink: 0; background: var(--takeda-white); }
+.brand-logo { width: 128px; height: auto; display: block; }
+.main-content { width: 100%; max-width: var(--brand-content-width); margin: auto; padding: clamp(1.25rem, 5vw, 4rem) 2rem; flex: 1; }
+.eyebrow { color: var(--takeda-azuki-maroon); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem; }
+h1 { margin: 0.5rem 0; font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.2; overflow-wrap: anywhere; }
+h2 { font-size: 1.4rem; margin-top: 0; }
+.intro { color: var(--brand-text-muted); max-width: 42rem; margin-bottom: 2.5rem; }
+.panel { background: var(--brand-surface); border: 1px solid var(--brand-border); border-radius: var(--brand-radius); padding: 2rem; max-width: 44rem; }
+.button { border: 1px solid transparent; border-radius: var(--brand-radius); padding: 0.7rem 1.2rem; cursor: pointer; min-height: 2.75rem; }
+.button-primary { background: var(--brand-action); color: var(--brand-on-primary); }
+.button-primary:hover { background: var(--brand-action-hover); }
+:focus-visible { outline: 3px solid var(--brand-focus); outline-offset: 3px; }
+.status { color: var(--brand-text-muted); margin-bottom: 0; }
+.app-footer { border-top: 1px solid var(--brand-border); color: var(--brand-text-muted); padding: 1rem 2rem; font-size: 0.8rem; }
+.skip-link { position: absolute; left: -10000px; }
+.skip-link:focus { left: 1rem; top: 1rem; background: white; padding: 0.5rem; z-index: 1; }
+@media (max-width: 480px) { .header-content, .main-content { padding-left: 1rem; padding-right: 1rem; } .panel { padding: 1.25rem; } }

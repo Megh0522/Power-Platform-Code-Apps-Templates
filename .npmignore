@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.test-output*/
+tests/
+*.tgz
+power.config.json
+.env*
+docs/
+README.md
+*.pdf

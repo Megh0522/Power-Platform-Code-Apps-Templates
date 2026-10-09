@@ -1,0 +1,29 @@
+/* Digital palette and typography from Takeda Global Brand Guidelines 9.0,
+   pages 16 and 18-20. Functional mappings below are starter choices, not TORO
+   component specifications. Open Sans is bundled for offline/self-hosted use. */
+:root {
+  --takeda-red: #e1242a;
+  --takeda-azuki-maroon: #891515;
+  --takeda-dark-gray: #34373f;
+  --takeda-black: #000000;
+  --takeda-heron-blue: #a1b1c4;
+  --takeda-light-gray: #edf2f4;
+  --takeda-white: #ffffff;
+  --takeda-light-heron-blue: #d1d8e0;
+  --takeda-light-pink: #f78c85;
+  --takeda-dark-red: #bd120a;
+  --takeda-dark-maroon: #450a0a;
+  --brand-primary: var(--takeda-red);
+  --brand-action: var(--takeda-azuki-maroon);
+  --brand-action-hover: var(--takeda-dark-maroon);
+  --brand-on-primary: var(--takeda-white);
+  --brand-text: var(--takeda-dark-gray);
+  --brand-text-muted: var(--takeda-dark-gray);
+  --brand-background: var(--takeda-light-gray);
+  --brand-surface: var(--takeda-white);
+  --brand-border: var(--takeda-heron-blue);
+  --brand-focus: var(--takeda-dark-gray);
+  --brand-font: 'Open Sans', Arial, sans-serif;
+  --brand-radius: 0.5rem;
+  --brand-content-width: 72rem;
+}

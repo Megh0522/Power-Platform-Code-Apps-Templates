@@ -1,0 +1,11 @@
+{
+  "name": "create-takeda-code-app",
+  "version": "0.1.0",
+  "description": "Interactive Git-installable Power Apps Code Apps starter",
+  "type": "module",
+  "private": true,
+  "bin": { "create-takeda-code-app": "bin/create.mjs" },
+  "engines": { "node": ">=22.12.0" },
+  "files": ["bin", "scripts", "template/src", "template/index.html", "template/gitignore", "template/package.json", "template/package-lock.json", "template/tsconfig.json", "template/vite.config.ts", ".github", ".vscode"],
+  "scripts": { "create": "node bin/create.mjs" }
+}
