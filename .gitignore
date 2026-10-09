@@ -10,5 +10,4 @@ power.config.json
 .test-output*/
 docs/
 tests/
-README.md
 *.pdf

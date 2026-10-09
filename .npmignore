@@ -6,5 +6,4 @@ tests/
 power.config.json
 .env*
 docs/
-README.md
 *.pdf
