@@ -112,34 +112,6 @@ In your generated app:
 
 Add data sources with `npm.cmd run pa -- app add data-source` after confirming connector and data permissions. Avoid embedding credentials in client-side code.
 
-Commit your generated app's lockfile and use `npm ci` for repeatable installation. The starter excludes `power.config.json` from Git to avoid passing one app's platform identity to every new project; a team may deliberately version a reviewed configuration for a specific shared app.
-
-## Clone the generator instead
-
-```powershell
-git clone https://github.com/Megh0522/Power-Platform-Code-Apps-Templates.git
-cd Power-Platform-Code-Apps-Templates
-npm.cmd run create
-```
-
-Open the new app folder after generation. Cloning this repository or using GitHub's template button does not itself display setup prompts.
-
-For Copilot or automated terminals without interactive input:
-
-```powershell
-npm.cmd run create -- --directory ../inventory-dashboard --name "Inventory Dashboard" --environment YOUR-ENVIRONMENT-GUID --skip-init
-```
-
-Replace `YOUR-ENVIRONMENT-GUID` with a real GUID. `--skip-init` installs dependencies but leaves platform initialization for later. `--no-install` skips both installation and initialization.
-
-## Can the install command use only a friendly name?
-
-Yes, after publishing the initializer to an npm registry. Publishing a package named `create-takeda-code-app` would make this possible:
-
-```powershell
-npm.cmd create takeda-code-app
-```
-
 **That command is a future publishing option, not the current installation command.** This repository is currently installed directly from GitHub, and its package has `private: true` to prevent accidental registry publication. Renaming `package.json` alone does not register a name with npm. A private registry or organization-scoped package can also provide a friendly command, with registry configuration and access set up for the team.
 
 ## References
