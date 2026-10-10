@@ -12,9 +12,10 @@ export async function scaffold(source, destination, config) {
     filter: path => !['node_modules', 'dist', '.git', 'power.config.json'].includes(basename(path)) && !basename(path).startsWith('.env')
   });
   await rename(join(destination, 'gitignore'), join(destination, '.gitignore'));
-  for (const directory of ['.github', '.vscode']) {
+  for (const directory of ['.github', '.agents', '.vscode']) {
     await cp(join(source, directory), join(destination, directory), { recursive: true });
   }
+  await cp(join(source, 'AGENTS.md'), join(destination, 'AGENTS.md'));
   await mkdir(join(destination, 'scripts'), { recursive: true });
   for (const file of ['lib.mjs', 'setup.mjs', 'doctor.mjs', 'web.mjs']) {
     await cp(join(source, 'scripts', file), join(destination, 'scripts', file));
