@@ -1,10 +1,11 @@
 import { cp, mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { basename, join } from 'node:path';
-import { validateName, validateEnvironment, slugify } from './lib.mjs';
+import { validateName, validateEnvironment, validateSolution, slugify } from './lib.mjs';
 
 export async function scaffold(source, destination, config) {
   const name = validateName(config.name);
   const environmentId = validateEnvironment(config.environment);
+  const solutionId = validateSolution(config.solution);
   // Exclusive creation prevents accidental writes into an existing app or checkout.
   await mkdir(destination, { recursive: false });
   await cp(join(source, 'template'), destination, {
@@ -17,7 +18,7 @@ export async function scaffold(source, destination, config) {
   }
   await cp(join(source, 'AGENTS.md'), join(destination, 'AGENTS.md'));
   await mkdir(join(destination, 'scripts'), { recursive: true });
-  for (const file of ['lib.mjs', 'setup.mjs', 'doctor.mjs', 'web.mjs']) {
+  for (const file of ['lib.mjs', 'setup.mjs', 'doctor.mjs', 'web.mjs', 'deploy.mjs']) {
     await cp(join(source, 'scripts', file), join(destination, 'scripts', file));
   }
   const pkgPath = join(destination, 'package.json');
@@ -30,4 +31,5 @@ export async function scaffold(source, destination, config) {
   lock.packages[''].name = pkg.name;
   await writeFile(lockPath, JSON.stringify(lock, null, 2) + '\n');
   await writeFile(join(destination, 'src', 'app.config.json'), JSON.stringify({ displayName: name, environmentId }, null, 2) + '\n');
+  await writeFile(join(destination, 'code-app.deploy.json'), JSON.stringify({ solutionId }, null, 2) + '\n');
 }

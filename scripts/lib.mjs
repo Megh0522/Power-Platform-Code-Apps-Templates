@@ -20,6 +20,12 @@ export function validateEnvironment(value) {
 export function slugify(name) {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 80) || 'takeda-code-app';
 }
+export function validateSolution(value = '') {
+  if (typeof value !== 'string') throw new Error('Solution ID must be a GUID or an empty string.');
+  const id = value.trim();
+  if (id && !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)) throw new Error('Use the solution GUID, not its display or unique name; leave blank to skip.');
+  return id;
+}
 export function runNode(file, args, cwd) {
   const result = spawnSync(process.execPath, [file, ...args], { cwd, stdio: 'inherit', shell: false });
   if (result.error) throw result.error;

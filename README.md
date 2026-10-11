@@ -1,6 +1,6 @@
 # Power Platform Code Apps Template
 
-Create a new Power Apps Code App with shared Takeda styling, React, TypeScript and Vite. The installer asks for your app name, Power Platform environment ID and destination folder, then installs the project dependencies and initializes the app.
+Create a new Power Apps Code App with shared Takeda styling, React, TypeScript and Vite. The installer asks for your app name, Power Platform environment ID, optional solution ID and destination folder, then installs the project dependencies and initializes the app.
 
 ## What is included
 
@@ -41,9 +41,32 @@ Answer these prompts:
 
 1. **App display name**, for example `Inventory Dashboard`.
 2. **Power Platform environment ID**, using your development environment GUID.
-3. **Destination folder**, for example `inventory-dashboard`.
+3. **Existing solution ID (optional)**, using a solution GUID from the same environment. Press Enter to skip.
+4. **Destination folder**, for example `inventory-dashboard`.
 
 The destination must be a new folder. The installer preserves existing folders and never publishes an app.
+
+### Publish into your selected solution
+
+Use an existing unmanaged development solution in the selected environment, with Dataverse and permissions to add app components. Open it under **Solutions** in the maker portal; its URL contains the solution GUID. After initialization, `npm.cmd run pa -- solution list` can also show solution IDs.
+
+The installer saves your choice in `code-app.deploy.json`, separately from the browser application and Microsoft's `power.config.json`. When ready, run:
+
+```powershell
+npm.cmd run deploy
+```
+
+This builds the app and runs `pa app push --solution-id <saved-guid>`. Solution membership is established during publication; `pa app init` does not support a solution parameter. Installation validates the GUID format; the Power Apps CLI checks solution existence and access during publication. Review both configuration files before deploying, especially after changing environments.
+
+You can edit `solutionId` in `code-app.deploy.json` later. An empty string uses the CLI's normal solution behavior. Choosing a solution does not create it or automatically add all tables, flows and dependencies; use the portable data/flows skill for those steps.
+
+For an agent terminal or scripted installation, supply the optional `--solution` flag:
+
+```powershell
+npx.cmd --yes github:Megh0522/Power-Platform-Code-Apps-Templates --directory inventory-dashboard --name "Inventory Dashboard" --environment <environment-guid> --solution <solution-guid> --skip-init
+```
+
+Replace the angle-bracket placeholders with actual GUIDs. `--skip-init` defers platform initialization; run `npm.cmd run setup` inside the generated folder when ready to sign in. Omitting `--solution` in non-interactive use skips solution selection. These changes are available on the default branch; the original `v0.1.0` tag is unchanged.
 
 To use the fixed initial release instead:
 
@@ -107,9 +130,9 @@ Run these inside the generated app, not inside this generator repository:
 | `npm run typecheck` | Check TypeScript |
 | `npm run build` | Build production assets in `dist/` |
 | `npm run pa -- --help` | Use the project-local Power Apps CLI |
-| `npm run deploy` | Build, then publish to the configured Power Platform environment |
+| `npm run deploy` | Build, then publish to the configured environment and saved solution, if selected |
 
-Before running `deploy`, review the app identity and destination environment in `power.config.json`. Sharing, licensing and data permissions are separate tasks. The classic `pac` CLI is optional; this starter uses the npm-based `pa` CLI locally.
+Before running `deploy`, review the app identity and destination environment in `power.config.json` and the solution ID in `code-app.deploy.json`. Sharing, licensing and data permissions are separate tasks. The classic `pac` CLI is optional; this starter uses the npm-based `pa` CLI locally.
 
 ## Add your business logic
 

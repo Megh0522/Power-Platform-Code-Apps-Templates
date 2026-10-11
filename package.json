@@ -6,6 +6,6 @@
   "private": true,
   "bin": { "create-takeda-code-app": "bin/create.mjs" },
   "engines": { "node": ">=22.12.0" },
-  "files": ["bin", "scripts", "template/src", "template/index.html", "template/gitignore", "template/package.json", "template/package-lock.json", "template/tsconfig.json", "template/vite.config.ts", ".github", ".agents", "AGENTS.md", ".vscode"],
+  "files": ["bin", "scripts", "template/src", "template/index.html", "template/gitignore", "template/package.json", "template/package-lock.json", "template/code-app.deploy.json", "template/tsconfig.json", "template/vite.config.ts", ".github", ".agents", "AGENTS.md", ".vscode"],
   "scripts": { "create": "node bin/create.mjs" }
 }
