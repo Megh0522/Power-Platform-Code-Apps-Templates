@@ -9,7 +9,7 @@ Create a new Power Apps Code App with shared Takeda styling, React, TypeScript a
 - Microsoft Power Apps SDK, Vite integration and project-local Power Apps CLI.
 - Setup and prerequisite-check scripts.
 - A repository-local Copilot skill for onboarding and setup.
-- An agent-neutral skill for adding/refreshing tables and flows, with optional solution creation and component membership.
+- Four focused agent-neutral skills for adding data sources, adding flows, refreshing data sources and refreshing flows, plus a combined solution/component workflow.
 
 The branding uses the supplied Global Brand Guidelines 9.0. This starter does not include the full TORO component library. Reference PDFs and standalone setup documents are excluded from the repository.
 
@@ -108,13 +108,24 @@ The skill is self-contained and travels with every generated app. You can also s
 
 ## Tables, flows and solutions with any agent
 
+Agents should use the shipped local skills first for supported integration tasks. `AGENTS.md` and the Copilot instructions route each request to its matching file; the installed CLI's help handles version differences without routine web searches.
+
+| Activity | Local skill |
+| --- | --- |
+| Add data sources | [code-app-add-data-source](.agents/skills/code-app-add-data-source/SKILL.md) |
+| Add flows | [code-app-add-flow](.agents/skills/code-app-add-flow/SKILL.md) |
+| Refresh data sources | [code-app-refresh-data-source](.agents/skills/code-app-refresh-data-source/SKILL.md) |
+| Refresh flows | [code-app-refresh-flow](.agents/skills/code-app-refresh-flow/SKILL.md) |
+
+For example, ask your agent: "Add my Dataverse table to this app using the local add-data-source skill. Ask me for the identifiers you need." Each file contains its own inputs, commands and verification steps. Refreshing a flow re-adds its existing GUID to regenerate the definition; refreshing a data source regenerates schemas rather than reloading records.
+
 The portable [code-app-data-flows skill](.agents/skills/code-app-data-flows/SKILL.md) works with an agent that can read Markdown and use a terminal or guide portal steps. It uses standard skill frontmatter and has no Copilot, MCP or plugin dependency. Automatic skill discovery varies by agent; `AGENTS.md` points to it, and you can always ask the agent to read it directly:
 
 > Read .agents/skills/code-app-data-flows/SKILL.md. Help me add or refresh my Code App's tables and flows. Ask for the required table identifiers or flow IDs, and whether I want a new or existing solution and which components should be included. Do not publish unless I request it.
 
 The skill covers native Dataverse tables, SharePoint/SQL connectors, generated schema refresh, flow definition updates, connection references, solution creation and component membership. It distinguishes Dataverse logical names from table GUIDs, and local integration from publication.
 
-New apps generated from the current default branch receive the skill and `AGENTS.md`. The original `v0.1.0` tag remains unchanged. For an existing app, copy `.agents/skills/code-app-data-flows/` into it and merge the skill entry into its existing `AGENTS.md` if present.
+New apps generated from the current default branch receive all integration skills and `AGENTS.md`. The original `v0.1.0` tag remains unchanged. For an existing app, copy the `code-app-*` folders from `.agents/skills/` into it and merge the routing table into its existing `AGENTS.md` if present. An agent that does not load `AGENTS.md` automatically can be asked to read the appropriate skill file directly.
 
 ## App commands
 
